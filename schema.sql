@@ -1,0 +1,30 @@
+CREATE TABLE
+  IF NOT EXISTS Person (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    uuid TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    sex CHARACTER(1) NOT NULL,
+    date_of_birth DATETIME NOT NULL,
+    place_of_birth TEXT NOT NULL,
+    father_name TEXT NOT NULL,
+    contact TEXT NOT NULL,
+    occupation_type TEXT NOT NULL,
+    budget REAL NOT NULL,
+    annual_income REAL NOT NULL,
+    notes TEXT NOT NULL,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    modifiedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+CREATE TABLE
+  IF NOT EXISTS Attachment (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    uuid TEXT UNIQUE NOT NULL,
+    type TEXT NOT NULL,
+    file_name TEXT NOT NULL,
+    file_type TEXT NOT NULL,
+    file_size INTEGER NOT NULL,
+    personDataID INTEGER NOT NULL,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (personDataID) REFERENCES Person (id) ON DELETE CASCADE
+  );
